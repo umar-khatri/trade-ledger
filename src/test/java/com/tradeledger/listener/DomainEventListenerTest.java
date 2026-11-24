@@ -61,3 +61,4 @@ class DomainEventListenerTest {
         listener.onDomainEvent(event);
     }
 }
+

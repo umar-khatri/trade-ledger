@@ -10,3 +10,4 @@ public record TargetAllocationResponse(
         BigDecimal targetWeight
 ) {
 }
+

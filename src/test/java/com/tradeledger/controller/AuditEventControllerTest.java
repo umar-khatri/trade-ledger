@@ -53,3 +53,4 @@ class AuditEventControllerTest {
                 .andExpect(jsonPath("$[0].portfolioId", is(portfolioId.toString())));
     }
 }
+

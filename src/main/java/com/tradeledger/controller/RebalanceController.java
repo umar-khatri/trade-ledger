@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/portfolios/{portfolioId}")
+@RequestMapping({"/api/v1/portfolios/{portfolioId}", "/portfolios/{portfolioId}"})
 @Tag(name = "Rebalancing", description = "Target allocation configuration and automated portfolio rebalancing engine")
 public class RebalanceController {
 
@@ -63,3 +63,4 @@ public class RebalanceController {
         return ResponseEntity.ok(rebalanceService.executeRebalance(portfolioId));
     }
 }
+

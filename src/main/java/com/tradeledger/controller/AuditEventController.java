@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/portfolios/{portfolioId}/audit-events")
+@RequestMapping({"/api/v1/portfolios/{portfolioId}/audit-events", "/portfolios/{portfolioId}/audit-events"})
 @Tag(name = "Audit Events", description = "Query immutable event trails stored in MongoDB")
 public class AuditEventController {
 
@@ -48,3 +48,4 @@ public class AuditEventController {
         return ResponseEntity.ok(events);
     }
 }
+

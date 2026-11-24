@@ -11,3 +11,4 @@ public record AuditEventResponse(
         Instant timestamp
 ) {
 }
+

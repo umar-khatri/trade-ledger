@@ -32,3 +32,4 @@ EXPOSE 8080
 
 # Production JVM options (G1GC, container-aware memory limits)
 ENTRYPOINT ["java", "-XX:+UseG1GC", "-XX:MaxRAMPercentage=75.0", "-Djava.security.egd=file:/dev/./urandom", "-jar", "app.jar"]
+

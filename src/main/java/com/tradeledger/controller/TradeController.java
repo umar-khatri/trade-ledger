@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/portfolios/{portfolioId}/trades")
+@RequestMapping({"/api/v1/portfolios/{portfolioId}/trades", "/portfolios/{portfolioId}/trades"})
 @Tag(name = "Trades", description = "Trade execution history and settlement records")
 public class TradeController {
 

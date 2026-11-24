@@ -69,3 +69,4 @@ class AuditEventServiceTest {
         assertThat(responses.getFirst().payload()).containsEntry("symbol", "AAPL");
     }
 }
+

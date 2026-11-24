@@ -26,3 +26,4 @@ public class DomainEventPublisher {
         applicationEventPublisher.publishEvent(event);
     }
 }
+

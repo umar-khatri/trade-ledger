@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/portfolios")
+@RequestMapping({"/api/v1/portfolios", "/portfolios"})
 @Tag(name = "Portfolios", description = "Portfolio and position management")
 public class PortfolioController {
 

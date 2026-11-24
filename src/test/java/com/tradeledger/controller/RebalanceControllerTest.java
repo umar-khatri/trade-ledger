@@ -104,3 +104,4 @@ class RebalanceControllerTest {
                 .andExpect(status().isOk());
     }
 }
+
