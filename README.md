@@ -292,3 +292,4 @@ Execute end-to-end integration tests using Testcontainers (requires Docker daemo
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
+
