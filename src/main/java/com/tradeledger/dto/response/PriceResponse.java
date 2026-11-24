@@ -9,3 +9,4 @@ public record PriceResponse(
         Instant timestamp
 ) {
 }
+

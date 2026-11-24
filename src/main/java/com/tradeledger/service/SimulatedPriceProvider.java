@@ -104,3 +104,4 @@ public class SimulatedPriceProvider implements PriceProvider {
         return Map.copyOf(currentPrices);
     }
 }
+

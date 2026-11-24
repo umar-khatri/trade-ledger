@@ -61,3 +61,4 @@ class SimulatedPriceProviderTest {
         assertThat(provider.getPrice("AAPL")).isEqualByComparingTo(new BigDecimal("200.0000"));
     }
 }
+

@@ -41,3 +41,4 @@ class PriceControllerTest {
                 .andExpect(jsonPath("$.price").value(185.5000));
     }
 }
+

@@ -83,3 +83,4 @@ class PriceServiceTest {
         assertThat(response.timestamp()).isNotNull();
     }
 }
+
