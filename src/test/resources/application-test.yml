@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+# Disable scheduled price updates during tests
+app:
+  price:
+    symbols: AAPL,GOOGL,MSFT
+    cache-ttl-seconds: 60
+    update-interval-ms: 999999999
+  rebalance:
+    drift-threshold: 0.02
+    min-cash-buffer: 100.00
+  matching:
+    max-retries: 3
