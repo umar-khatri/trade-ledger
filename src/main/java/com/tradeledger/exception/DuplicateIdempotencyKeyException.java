@@ -5,3 +5,4 @@ public class DuplicateIdempotencyKeyException extends RuntimeException {
         super("Duplicate idempotency key: " + key);
     }
 }
+

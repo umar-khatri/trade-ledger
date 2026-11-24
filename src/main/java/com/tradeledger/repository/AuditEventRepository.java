@@ -21,3 +21,4 @@ public interface AuditEventRepository extends MongoRepository<AuditEventDocument
     List<AuditEventDocument> findByPortfolioIdAndEventTypeAndTimestampBetweenOrderByTimestampDesc(
             String portfolioId, String eventType, Instant from, Instant to);
 }
+

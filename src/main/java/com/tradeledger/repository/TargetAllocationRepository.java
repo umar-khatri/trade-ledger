@@ -14,3 +14,4 @@ public interface TargetAllocationRepository extends JpaRepository<TargetAllocati
 
     void deleteByPortfolioId(UUID portfolioId);
 }
+

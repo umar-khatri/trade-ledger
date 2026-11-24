@@ -22,3 +22,4 @@ public class InsufficientFundsException extends RuntimeException {
         return available;
     }
 }
+

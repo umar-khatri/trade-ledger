@@ -24,3 +24,4 @@ public class CashDepositedEvent extends DomainEvent {
         return payload;
     }
 }
+

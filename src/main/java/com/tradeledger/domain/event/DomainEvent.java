@@ -39,3 +39,4 @@ public abstract class DomainEvent {
      */
     public abstract Map<String, Object> toPayload();
 }
+

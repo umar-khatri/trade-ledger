@@ -72,3 +72,4 @@ public class AuditEventDocument {
         this.timestamp = timestamp;
     }
 }
+

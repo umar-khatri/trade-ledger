@@ -48,3 +48,4 @@ CREATE TABLE target_allocation (
     target_weight   NUMERIC(7,6) NOT NULL,
     UNIQUE (portfolio_id, symbol)
 );
+

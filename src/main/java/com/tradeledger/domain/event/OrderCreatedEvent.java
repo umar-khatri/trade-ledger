@@ -44,3 +44,4 @@ public class OrderCreatedEvent extends DomainEvent {
         return orderId;
     }
 }
+

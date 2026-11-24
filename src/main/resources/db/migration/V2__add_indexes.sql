@@ -22,3 +22,4 @@ CREATE INDEX idx_target_alloc_portfolio ON target_allocation(portfolio_id);
 
 -- Note: orders.idempotency_key already has an implicit B-tree index
 -- from the UNIQUE constraint, so no extra index is needed there.
+

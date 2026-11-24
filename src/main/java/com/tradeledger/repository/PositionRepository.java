@@ -15,3 +15,4 @@ public interface PositionRepository extends JpaRepository<Position, UUID> {
 
     Optional<Position> findByPortfolioIdAndSymbol(UUID portfolioId, String symbol);
 }
+

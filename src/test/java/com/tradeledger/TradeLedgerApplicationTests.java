@@ -15,3 +15,4 @@ class TradeLedgerApplicationTests extends AbstractIntegrationTest {
         assertTrue(true);
     }
 }
+

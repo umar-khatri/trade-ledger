@@ -14,3 +14,4 @@ public class TradeLedgerApplication {
         SpringApplication.run(TradeLedgerApplication.class, args);
     }
 }
+

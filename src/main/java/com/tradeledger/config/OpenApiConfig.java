@@ -21,3 +21,4 @@ public class OpenApiConfig {
                                 .url("https://github.com/tradeledger")));
     }
 }
+

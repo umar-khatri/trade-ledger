@@ -22,3 +22,4 @@ public interface TradeRepository extends JpaRepository<Trade, UUID> {
             """)
     List<Trade> findByPortfolioId(@Param("portfolioId") UUID portfolioId);
 }
+

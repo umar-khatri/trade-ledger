@@ -28,3 +28,4 @@ public class InsufficientSharesException extends RuntimeException {
         return available;
     }
 }
+

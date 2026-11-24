@@ -5,3 +5,4 @@ public class InvalidAllocationException extends RuntimeException {
         super(message);
     }
 }
+

@@ -28,3 +28,4 @@ public class OrderCancelledEvent extends DomainEvent {
         return payload;
     }
 }
+

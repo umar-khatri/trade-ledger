@@ -25,3 +25,4 @@ public class RebalanceExecutedEvent extends DomainEvent {
         return payload;
     }
 }
+
