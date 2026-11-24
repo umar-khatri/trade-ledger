@@ -14,3 +14,4 @@ public record TradeResponse(
         LocalDateTime executedAt
 ) {
 }
+

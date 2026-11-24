@@ -163,3 +163,4 @@ class OrderBookTest {
         assertThat(orderBook.getBestBid()).isNull();
     }
 }
+

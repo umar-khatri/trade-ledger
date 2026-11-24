@@ -47,3 +47,4 @@ class TradeControllerTest {
                 .andExpect(jsonPath("$[0].price").value(150.00));
     }
 }
+

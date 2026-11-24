@@ -31,3 +31,4 @@ public class TradeController {
         return ResponseEntity.ok(tradeService.getTradesForPortfolio(portfolioId));
     }
 }
+

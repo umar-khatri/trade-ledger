@@ -177,3 +177,4 @@ class OrderServiceTest {
         verify(matchingEngine).cancelOrder(eq("AAPL"), eq(orderId));
     }
 }
+
