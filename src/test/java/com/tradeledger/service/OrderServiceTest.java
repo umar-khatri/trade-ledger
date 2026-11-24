@@ -54,6 +54,9 @@ class OrderServiceTest {
     @Mock
     private PriceService priceService;
 
+    @Mock
+    private DomainEventPublisher eventPublisher;
+
     private OrderService orderService;
 
     private UUID portfolioId;
@@ -67,6 +70,7 @@ class OrderServiceTest {
                 matchingEngine,
                 orderExecutionService,
                 priceService,
+                eventPublisher,
                 3
         );
         portfolioId = UUID.randomUUID();

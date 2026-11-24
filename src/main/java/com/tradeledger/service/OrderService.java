@@ -40,6 +40,7 @@ public class OrderService {
     private final MatchingEngine matchingEngine;
     private final OrderExecutionService orderExecutionService;
     private final PriceService priceService;
+    private final DomainEventPublisher eventPublisher;
     private final int maxRetries;
 
     public OrderService(
@@ -49,6 +50,7 @@ public class OrderService {
             MatchingEngine matchingEngine,
             OrderExecutionService orderExecutionService,
             PriceService priceService,
+            DomainEventPublisher eventPublisher,
             @Value("${app.matching.max-retries:3}") int maxRetries) {
         this.orderRepository = orderRepository;
         this.portfolioRepository = portfolioRepository;
@@ -56,6 +58,7 @@ public class OrderService {
         this.matchingEngine = matchingEngine;
         this.orderExecutionService = orderExecutionService;
         this.priceService = priceService;
+        this.eventPublisher = eventPublisher;
         this.maxRetries = maxRetries;
     }
 
@@ -111,6 +114,13 @@ public class OrderService {
                 idempotencyKey != null && !idempotencyKey.trim().isEmpty() ? idempotencyKey.trim() : null
         );
         order = orderRepository.save(order);
+        if (eventPublisher != null) {
+            eventPublisher.publish(new com.tradeledger.domain.event.OrderCreatedEvent(
+                    order.getPortfolioId(), order.getId(), order.getSymbol(),
+                    order.getSide().name(), order.getType().name(),
+                    order.getQuantity(), order.getLimitPrice()
+            ));
+        }
 
         // 5. Acquire per-symbol lock and match
         ReentrantLock lock = matchingEngine.getLock(symbol);
@@ -167,6 +177,11 @@ public class OrderService {
             matchingEngine.cancelOrder(order.getSymbol(), orderId);
             order.cancel();
             order = orderRepository.save(order);
+            if (eventPublisher != null) {
+                eventPublisher.publish(new com.tradeledger.domain.event.OrderCancelledEvent(
+                        order.getPortfolioId(), order.getId(), order.getSymbol(), order.getRemainingQuantity()
+                ));
+            }
             return toResponse(order);
         } finally {
             lock.unlock();

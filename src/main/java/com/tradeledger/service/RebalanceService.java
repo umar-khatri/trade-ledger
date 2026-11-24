@@ -49,6 +49,7 @@ public class RebalanceService {
     private final PositionRepository positionRepository;
     private final PriceService priceService;
     private final OrderService orderService;
+    private final DomainEventPublisher eventPublisher;
 
     private final BigDecimal driftThreshold;
     private final BigDecimal minCashBuffer;
@@ -59,6 +60,7 @@ public class RebalanceService {
             PositionRepository positionRepository,
             PriceService priceService,
             OrderService orderService,
+            DomainEventPublisher eventPublisher,
             @Value("${app.rebalance.drift-threshold:0.02}") BigDecimal driftThreshold,
             @Value("${app.rebalance.min-cash-buffer:100.00}") BigDecimal minCashBuffer) {
         this.targetAllocationRepository = targetAllocationRepository;
@@ -66,6 +68,7 @@ public class RebalanceService {
         this.positionRepository = positionRepository;
         this.priceService = priceService;
         this.orderService = orderService;
+        this.eventPublisher = eventPublisher;
         this.driftThreshold = driftThreshold;
         this.minCashBuffer = minCashBuffer;
     }
@@ -310,6 +313,14 @@ public class RebalanceService {
             String idempotencyKey = "rebal-" + portfolioId + "-" + proposed.symbol() + "-" + System.nanoTime();
             OrderResponse response = orderService.placeOrder(portfolioId, orderRequest, idempotencyKey);
             executedOrders.add(response);
+        }
+
+        if (eventPublisher != null) {
+            List<String> orderIdStrings = executedOrders.stream()
+                    .map(o -> o.id().toString())
+                    .toList();
+            eventPublisher.publish(new com.tradeledger.domain.event.RebalanceExecutedEvent(
+                    portfolioId, executedOrders.size(), orderIdStrings));
         }
 
         return executedOrders;

@@ -34,16 +34,19 @@ public class OrderExecutionService {
     private final PositionRepository positionRepository;
     private final OrderRepository orderRepository;
     private final TradeRepository tradeRepository;
+    private final DomainEventPublisher eventPublisher;
 
     public OrderExecutionService(
             PortfolioRepository portfolioRepository,
             PositionRepository positionRepository,
             OrderRepository orderRepository,
-            TradeRepository tradeRepository) {
+            TradeRepository tradeRepository,
+            DomainEventPublisher eventPublisher) {
         this.portfolioRepository = portfolioRepository;
         this.positionRepository = positionRepository;
         this.orderRepository = orderRepository;
         this.tradeRepository = tradeRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     /**
@@ -131,7 +134,20 @@ public class OrderExecutionService {
 
         // Record Trade
         Trade trade = new Trade(buyOrder.getId(), sellOrder.getId(), symbol, matchPrice, matchQty);
-        return tradeRepository.save(trade);
+        trade = tradeRepository.save(trade);
+
+        if (eventPublisher != null) {
+            eventPublisher.publish(new com.tradeledger.domain.event.OrderFilledEvent(
+                    buyer.getId(), buyOrder.getId(), trade.getId(), symbol, matchPrice,
+                    matchQty, buyOrder.getFilledQuantity(), buyOrder.getStatus() == OrderStatus.FILLED
+            ));
+            eventPublisher.publish(new com.tradeledger.domain.event.OrderFilledEvent(
+                    seller.getId(), sellOrder.getId(), trade.getId(), symbol, matchPrice,
+                    matchQty, sellOrder.getFilledQuantity(), sellOrder.getStatus() == OrderStatus.FILLED
+            ));
+        }
+
+        return trade;
     }
 }
 

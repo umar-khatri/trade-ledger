@@ -51,6 +51,9 @@ class RebalanceServiceTest {
     @Mock
     private OrderService orderService;
 
+    @Mock
+    private DomainEventPublisher eventPublisher;
+
     private RebalanceService rebalanceService;
 
     private UUID portfolioId;
@@ -63,6 +66,7 @@ class RebalanceServiceTest {
                 positionRepository,
                 priceService,
                 orderService,
+                eventPublisher,
                 new BigDecimal("0.02"), // 2% drift threshold
                 new BigDecimal("100.00") // 100 min cash buffer
         );

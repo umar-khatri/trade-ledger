@@ -38,6 +38,9 @@ class PortfolioServiceTest {
     @Mock
     private PriceProvider priceProvider;
 
+    @Mock
+    private DomainEventPublisher eventPublisher;
+
     @InjectMocks
     private PortfolioService portfolioService;
 

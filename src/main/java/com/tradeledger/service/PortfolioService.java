@@ -23,13 +23,16 @@ public class PortfolioService {
     private final PortfolioRepository portfolioRepository;
     private final PositionRepository positionRepository;
     private final PriceProvider priceProvider;
+    private final DomainEventPublisher eventPublisher;
 
     public PortfolioService(PortfolioRepository portfolioRepository,
                             PositionRepository positionRepository,
-                            PriceProvider priceProvider) {
+                            PriceProvider priceProvider,
+                            DomainEventPublisher eventPublisher) {
         this.portfolioRepository = portfolioRepository;
         this.positionRepository = positionRepository;
         this.priceProvider = priceProvider;
+        this.eventPublisher = eventPublisher;
     }
 
     @Transactional
@@ -57,6 +60,10 @@ public class PortfolioService {
         Portfolio portfolio = findPortfolioOrThrow(portfolioId);
         portfolio.depositCash(request.amount());
         portfolio = portfolioRepository.save(portfolio);
+        if (eventPublisher != null) {
+            eventPublisher.publish(new com.tradeledger.domain.event.CashDepositedEvent(
+                    portfolioId, request.amount(), portfolio.getCashBalance()));
+        }
         return toResponse(portfolio);
     }
 
